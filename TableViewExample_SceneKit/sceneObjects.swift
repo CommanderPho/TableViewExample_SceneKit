@@ -30,7 +30,7 @@ class DrawObjectClass{
     
     
     
-    func drawSphere(inout scene:SCNScene)
+	func drawSphere( scene:inout SCNScene)
     {
         
         let camera = SCNNode()
@@ -45,7 +45,7 @@ class DrawObjectClass{
             let y:CGFloat = CGFloat(arc4random()%1000) / 50.0 - 5.0
             let z:CGFloat = CGFloat(arc4random()%1000) / 50.0 - 5.0
             
-            secondSphereNode.geometry!.firstMaterial!.emission.contents = NSColor.blackColor()
+            secondSphereNode.geometry!.firstMaterial!.emission.contents = NSColor.black
             secondSphereNode.geometry!.firstMaterial!.name = "sphere"+i.description
             
             //secondSphereNode.camera!.setProjectionTransform(self.mat)

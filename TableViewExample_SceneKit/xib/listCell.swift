@@ -19,7 +19,7 @@ class listCell: NSView{
     
     @IBAction func reloadAction(sender: AnyObject) {
         
-        myView.backgroundColor = NSColor.whiteColor()
+        myView.backgroundColor = NSColor.white
         
     }
     

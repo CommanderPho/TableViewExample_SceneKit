@@ -29,7 +29,7 @@ class ScrollViewController: NSViewController {
             var scene = SCNScene()
             let TScene = DrawObjectClass(w:600,h:200)
             
-            TScene.drawSphere(&scene)
+			TScene.drawSphere(scene: &scene)
             
             self.dataStr.append(t_data(label: "cell_"+i.description, sceneView: scene))
             //ad.TargetNMFVectorView.append(SceneClass())
@@ -57,21 +57,21 @@ class ScrollViewController: NSViewController {
         
         for i in 0..<self.dataStr.count{
             
-            let v = listCell2(nibName:"listCell2",bundle:nil)
+			let v = listCell2(nibName:NSNib.Name(rawValue: "listCell2"),bundle:nil)
             let subView = NSView(frame: NSRect(x:10,y:height - i*400,width:600,height:400))
-            subView.addSubview(v!.view)
+			subView.addSubview(v.view)
             view.addSubview(subView)
             
-            v!.label.stringValue = self.dataStr[i].label
-            v!.myView.scene = self.dataStr[i].sceneView
-            v!.myView.backgroundColor = NSColor.grayColor()
+			v.label.stringValue = self.dataStr[i].label
+			v.myView.scene = self.dataStr[i].sceneView
+			v.myView.backgroundColor = NSColor.gray
             
             
             
             var scene = SCNScene()
             let TScene = DrawObjectClass(w:600,h:200)
             
-            TScene.drawSphere(&scene)
+			TScene.drawSphere(scene: &scene)
 
             
             let label = NSTextField(frame: NSRect(x: 10, y: height - i*300, width: 300, height: 300))

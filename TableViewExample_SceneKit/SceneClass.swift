@@ -11,11 +11,11 @@ import SceneKit
 
 class SceneClass:SCNView{
     
-    var ad:AppDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+	var ad:AppDelegate = NSApplication.shared.delegate as! AppDelegate
     
-    override func mouseDown(theEvent: NSEvent) {
+	override func mouseDown(with event: NSEvent) {
         // check what nodes are clicked
-        let p = self.convertPoint(theEvent.locationInWindow, fromView: nil)
+		let p = self.convert(event.locationInWindow, from: nil)
         
         Swift.print("(x,y) = \(p.x),\(p.y)")
         
@@ -33,21 +33,18 @@ class SceneClass:SCNView{
             Swift.print("selected item : name \(name)")
             // ======= highlight it!
             SCNTransaction.begin()
-            SCNTransaction.setAnimationDuration(0.5)
+			SCNTransaction.animationDuration = 0.5
             
             //on completion
-            SCNTransaction.setCompletionBlock(){
-                
-                
+			SCNTransaction.completionBlock = {
                 SCNTransaction.begin()
-                SCNTransaction.setAnimationDuration(0.5)
+                SCNTransaction.animationDuration = 0.5
                 material.emission.contents = initialColor
-
                 SCNTransaction.commit()
             }
             
             
-            material.emission.contents = NSColor.redColor()
+            material.emission.contents = NSColor.red
             SCNTransaction.commit()
             
             
@@ -55,14 +52,13 @@ class SceneClass:SCNView{
         
         
         
-        super.mouseDown(theEvent)
+		super.mouseDown(with: event)
         
     }
     
-    override func mouseMoved(theEvent: NSEvent) {
-        
+	override func mouseMoved(with event: NSEvent) {
    
-        super.mouseMoved(theEvent)
+		super.mouseMoved(with: event)
     }
     
     

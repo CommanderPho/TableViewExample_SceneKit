@@ -12,16 +12,15 @@ import SceneKit
 
 class tableViewController: NSViewController {
     
-    var ad:AppDelegate = NSApplication.sharedApplication().delegate as! AppDelegate //AppDelegateのインスタンスを取得
+    var ad:AppDelegate = NSApplication.shared.delegate as! AppDelegate
 
     @IBOutlet weak var myTableView: NSTableView!
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nib = NSNib(nibNamed: "listCell", bundle: NSBundle.mainBundle())
-        myTableView.registerNib(nib!, forIdentifier: "listCell")
+		let nib = NSNib(nibNamed: NSNib.Name(rawValue: "listCell"), bundle: Bundle.main)
+		myTableView.register(nib!, forIdentifier: NSUserInterfaceItemIdentifier(rawValue: "listCell"))
         print("tableView load nib done")
 
         
@@ -36,13 +35,11 @@ class tableViewController: NSViewController {
     
     func setupTable(){
 
-        
-        
         for i in 0..<10{
             var scene = SCNScene()
             let TScene = DrawObjectClass(w:600,h:200)
         
-            TScene.drawSphere(&scene)
+			TScene.drawSphere(scene: &scene)
         
             self.dataStr.append(t_data(label: "cell_"+i.description, sceneView: scene))
             //ad.TargetNMFVectorView.append(SceneClass())
@@ -56,21 +53,20 @@ class tableViewController: NSViewController {
 
 extension tableViewController: NSTableViewDataSource, NSTableViewDelegate {
     
+	func numberOfRows(in tableView: NSTableView) -> Int {
+		return self.dataStr.count
+	}
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return self.dataStr.count
-    }
-    
-    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+	func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 150
     }
 
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
         print("tableVIew(\(row))")
         
-        let cell = tableView.makeViewWithIdentifier("listCell", owner: self) as! listCell
+		let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "listCell"), owner: self) as! listCell
         let item:t_data = self.dataStr[row]
         
         cell.label.stringValue = item.label

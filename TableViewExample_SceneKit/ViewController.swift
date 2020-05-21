@@ -11,7 +11,7 @@ import Cocoa
 
 class ViewController: NSViewController {
     
-    var ad:AppDelegate = NSApplication.sharedApplication().delegate as! AppDelegate //AppDelegateのインスタンスを取得
+	var ad:AppDelegate = NSApplication.shared.delegate as! AppDelegate
 
     @IBOutlet weak var myView2: NSView!
     @IBOutlet weak var myView: NSView!
@@ -22,7 +22,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.MVC = tableViewController(nibName:"tableViewController",bundle:nil)
+		self.MVC = tableViewController(nibName:NSNib.Name(rawValue: "tableViewController"),bundle:nil)
         self.MVC.view.frame  = self.myView.bounds
         
         self.MVC.setupTable()
@@ -37,12 +37,8 @@ class ViewController: NSViewController {
         
        self.MVC.myTableView.reloadData()
     }
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
+	
+    
 
 }
 
